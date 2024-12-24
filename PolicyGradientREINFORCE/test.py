@@ -33,7 +33,7 @@ class PolicyGradientModel(nn.Module):
 
 model = PolicyGradientModel(input_layer,output_layer,hidden_layer)    
 
-model.load_state_dict(torch.load("PGmodel1.pth",weights_only=True))
+model.load_state_dict(torch.load("PGmodel2.pth",weights_only=True))
 
 observation, info = env.reset()
 

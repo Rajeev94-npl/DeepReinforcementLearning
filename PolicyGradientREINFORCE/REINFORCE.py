@@ -86,4 +86,4 @@ for episode in range(MAX_EPISODES):
     optimizer.step()
     print(f"Training episode: {episode}")
 
-torch.save(model.state_dict(),"PGmodel1.pth")
+torch.save(model.state_dict(),"PGmodel2.pth")
