@@ -14,13 +14,20 @@ output_layer = 2
 learning_rate = 0.009
 hidden_layer = 150
 
-model = nn.Sequential(
-     nn.Linear(input_layer, hidden_layer),
-     nn.LeakyReLU(),
-     nn.Linear(hidden_layer, output_layer),
-     nn.Softmax(dim=0) 
-)
+class PolicyGradientModel(nn.Module):
+    def __init__(self, input_size,hidden_size, output_size):
+        super(PolicyGradientModel,self).__init__()
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.fc2 = nn.Linear(hidden_size, output_size)
+        self.act1 = nn.LeakyReLU()
+        self.output = nn.Softmax(dim=0)
+    
+    def forward(self,x):
+        x = self.act1(self.fc1(x))
+        x = self.output(self.fc2(x))
+        return x
 
+model = PolicyGradientModel(input_layer,hidden_layer,output_layer)
 #Optimizer
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
