@@ -4,7 +4,7 @@ import numpy as np
 import ale_py
 
 from gymnasium.wrappers import AtariPreprocessing
-from gymnasium.wrappers import FrameStackObservation
+from gymnasium.wrappers.frame_stack import FrameStack
 from gymnasium.wrappers import TransformReward
 
 gym.register_envs(ale_py)
@@ -16,7 +16,7 @@ def make_env(env_name,
                    frameskip=1
               )
     env = AtariPreprocessing(env, screen_size=84, scale_obs=True)
-    env = FrameStackObservation(env, stack_size=4)
+    env = FrameStack(env, stack_size=4)
     if clip_rewards:
         env = TransformReward(env, lambda r: np.sign(r))
     return env
